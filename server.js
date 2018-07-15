@@ -65,7 +65,7 @@ router.route("/orders")
     db.order = req.body.order;
     db.latitude = req.body.latitude;
     db.longitude = req.body.longitude;
-
+    db.status = req.body.status
     db.save(function (err) {
 
       if (err) {
@@ -161,6 +161,21 @@ app.get('/restuarant/:name', (req, res, next) => {
       }
     })
 
+})
+
+app.get("/orders/:phoneNumber",(req,res,next) => {
+  var response = {};
+
+  mongoOp.find({phoneNumber:req.params.phoneNumber}).select("userName phoneNUmber order restuarant status")
+  .exec((err, orders) => {
+    if(err){
+      return next(err)
+    }if(!order){
+      res.json({success:false, message:"No orders ahve been made by this user recently"})
+    }else {
+      res.json({success:true, message: orders})
+    }
+  })
 })
 
 app.listen(process.env.PORT|| 4040)
