@@ -178,7 +178,7 @@ app.get("/orders/:phoneNumber",(req,res,next) => {
   })
 })
 
-app.put("/orders", (req,res) => {
+app.put("/orders/:id", (req,res) => {
   var response={}
 
   mongoOp.findById(req.params.id, function(err,data){
