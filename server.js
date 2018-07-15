@@ -170,7 +170,7 @@ app.get("/orders/:phoneNumber",(req,res,next) => {
   .exec((err, orders) => {
     if(err){
       return next(err)
-    }if(!order){
+    }if(!orders){
       res.json({success:false, message:"No orders ahve been made by this user recently"})
     }else {
       res.json({success:true, message: orders})
