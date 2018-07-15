@@ -178,5 +178,27 @@ app.get("/orders/:phoneNumber",(req,res,next) => {
   })
 })
 
+app.put("/orders", (req,res) => {
+  var response={}
+
+  mongoOp.findById(req.params.id, function(err,data){
+    if(err){
+      response ={ "error": true, "message": "Error fetching data" } 
+    }else {
+      if(req.body.status !== undefined){
+        data.status = req.body.status
+      }
+      data.save(function (err) {
+        if (err) {
+            response = { 'error': true, 'message': "Error updating data" }
+        } else {
+            response = { "error": false, "message": "Data is updated for " + req.params.id };
+        }
+        res.json(response);
+    })
+    }
+  })
+})
+
 app.listen(process.env.PORT|| 4040)
 console.log("App is listening on port 4040");
