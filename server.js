@@ -65,7 +65,8 @@ router.route("/orders")
     db.order = req.body.order;
     db.latitude = req.body.latitude;
     db.longitude = req.body.longitude;
-    db.status = req.body.status
+    db.status = req.body.status;
+    db.price = req.body.price;
     db.save(function (err) {
 
       if (err) {
@@ -166,7 +167,7 @@ app.get('/restuarant/:name', (req, res, next) => {
 app.get("/orders/:phoneNumber",(req,res,next) => {
   var response = {};
 
-  mongoOp.find({phoneNumber:req.params.phoneNumber}).select("userName phoneNUmber order restuarant status")
+  mongoOp.find({phoneNumber:req.params.phoneNumber}).select("userName phoneNUmber order restuarant status price")
   .exec((err, orders) => {
     if(err){
       return next(err)

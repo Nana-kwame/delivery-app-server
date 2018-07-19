@@ -12,6 +12,7 @@ var orderSchema = {
   "order": String,
   "latitude": Number,
   "longitude": Number,
+  "price": Number,
   "status": {
     type: String,
     enum:['processing','en route','completed'],
